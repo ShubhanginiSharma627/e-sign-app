@@ -1,73 +1,135 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Zoho ESign PDF Generator
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This project is a web application that allows users to generate a PDF, preview it, and upload it to Zoho for e-signing. The application provides a simple user interface to create and manage PDFs, and integrates with Zoho Sign for document signing.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
 
-## Description
+- [Zoho ESign PDF Generator](#zoho-esign-pdf-generator)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [API Endpoints](#api-endpoints)
+  - [Environment Variables](#environment-variables)
+  - [Testing](#testing)
+  - [Technologies Used](#technologies-used)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Contact](#contact)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
+
+- Generate a PDF and preview it within the browser.
+- Enter recipient's email and upload the PDF to Zoho for e-signing.
+- Reset the interface to create a new PDF.
+- Responsive design for desktop and mobile views.
 
 ## Installation
 
-```bash
-$ npm install
-```
+1. **Clone the Repository:**
 
-## Running the app
+   ```bash
+   git clone https://github.com/yourusername/zoho-esign-pdf-generator.git
+   cd zoho-esign-pdf-generator
+   ```
 
-```bash
-# development
-$ npm run start
+2. **Install Dependencies:**
 
-# watch mode
-$ npm run start:dev
+   Ensure you have [Node.js](https://nodejs.org/) installed, then run:
 
-# production mode
-$ npm run start:prod
-```
+   ```bash
+   npm install
+   ```
 
-## Test
+3. **Set Up Environment Variables:**
 
-```bash
-# unit tests
-$ npm run test
+   Create a `.env` file in the root directory and add the following variables:
 
-# e2e tests
-$ npm run test:e2e
+   ```bash
+   ZOHO_CLIENT_ID=your_zoho_client_id
+   ZOHO_CLIENT_SECRET=your_zoho_client_secret
+   ZOHO_REFRESH_TOKEN=your_zoho_refresh_token
+   ```
 
-# test coverage
-$ npm run test:cov
-```
+4. **Run the Application:**
 
-## Support
+   Start the application using:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+   ```bash
+   npm run start
+   ```
 
-## Stay in touch
+5. **Open the Application:**
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+   Navigate to `http://localhost:3000` in your web browser to access the application.
 
-## License
+## Usage
 
-Nest is [MIT licensed](LICENSE).
+1. **Generate a PDF:**
+
+   Click on the "Generate PDF" button. The application will create a PDF and display a preview.
+
+2. **Upload to Zoho:**
+
+   Enter the recipient's email and click on the "Upload to Zoho" button. A message will confirm the successful upload.
+
+3. **Reset for New PDF:**
+
+   Click the "Create New PDF" button to reset the interface and generate another PDF.
+
+## API Endpoints
+
+- **Generate PDF:** `POST /pdf/create`
+- **Upload PDF:** `POST /pdf/upload`
+
+These endpoints are implemented in the backend using NestJS and can be tested using tools like Postman or cURL.
+
+## Environment Variables
+
+The application uses the following environment variables to configure the Zoho API integration:
+
+- **`ZOHO_CLIENT_ID`**: Your Zoho API client ID.
+- **`ZOHO_CLIENT_SECRET`**: Your Zoho API client secret.
+- **`ZOHO_REFRESH_TOKEN`**: Your Zoho refresh token.
+
+Ensure these values are set correctly in your `.env` file.
+
+## Testing
+
+1. **Run Unit Tests:**
+
+   ```bash
+   npm run test
+   ```
+
+2. **Run End-to-End Tests:**
+
+   ```bash
+   npm run test:e2e
+   ```
+
+3. **Run Tests with Coverage:**
+
+   ```bash
+   npm run test:cov
+   ```
+
+Test files are located in the `test` directory. Coverage reports can be found in the `coverage` directory.
+
+## Technologies Used
+
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** NestJS, Express
+- **PDF Generation:** PDFKit
+- **API Integration:** Zoho Sign API
+- **Testing:** Jest, Supertest
+
+## Contributing
+
+Contributions are welcome! Please follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes and commit them (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Open a pull request.
