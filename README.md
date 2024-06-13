@@ -14,8 +14,6 @@ This project is a web application that allows users to generate a PDF, preview i
   - [Testing](#testing)
   - [Technologies Used](#technologies-used)
   - [Contributing](#contributing)
-  - [License](#license)
-  - [Contact](#contact)
 
 ## Features
 
