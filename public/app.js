@@ -1,40 +1,57 @@
-document.getElementById('generate-btn').addEventListener('click', generatePdf);
-document.getElementById('upload-btn').addEventListener('click', uploadPdf);
+document.addEventListener('DOMContentLoaded', () => {
+  const generateBtn = document.getElementById('generate-btn');
+  const pdfPreview = document.getElementById('pdf-preview');
+  const emailSection = document.getElementById('email-section');
+  const uploadBtn = document.getElementById('upload-btn');
+  const message = document.getElementById('message');
+  const resetBtn = document.getElementById('reset-btn');
 
-function generatePdf() {
-  fetch('/pdf/create', {
-    method: 'POST',
-  })
-    .then((response) => response.blob())
-    .then((blob) => {
-      const url = URL.createObjectURL(blob);
-      const iframe = document.getElementById('pdf-preview');
-      iframe.src = url;
-      iframe.style.display = 'block';
-      document.getElementById('email-section').style.display = 'block';
-    })
-    .catch((error) => console.error('Error generating PDF:', error));
-}
+  generateBtn.addEventListener('click', generatePdf);
+  uploadBtn.addEventListener('click', uploadPdf);
+  resetBtn.addEventListener('click', resetUI);
 
-function uploadPdf() {
-  const email = document.getElementById('email').value;
-  if (!email) {
-    alert('Please enter an email.');
-    return;
+  function generatePdf() {
+    fetch('/pdf/create', { method: 'POST' })
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = URL.createObjectURL(blob);
+        pdfPreview.src = url;
+        pdfPreview.classList.remove('hidden');
+        emailSection.classList.remove('hidden');
+        generateBtn.classList.add('hidden');
+      })
+      .catch((error) => console.error('Error generating PDF:', error));
   }
 
-  fetch('/pdf/upload', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      document.getElementById('message').textContent =
-        'PDF uploaded successfully.';
-      console.log('Upload response:', data);
+  function uploadPdf() {
+    const email = document.getElementById('email').value;
+    if (!email) {
+      alert('Please enter an email.');
+      return;
+    }
+
+    fetch('/pdf/upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
     })
-    .catch((error) => console.error('Error uploading PDF:', error));
-}
+      .then((response) => response.json())
+      .then((data) => {
+        message.textContent = 'PDF uploaded successfully.';
+        message.classList.remove('hidden');
+        pdfPreview.classList.add('hidden');
+        emailSection.classList.add('hidden');
+        resetBtn.classList.remove('hidden');
+      })
+      .catch((error) => console.error('Error uploading PDF:', error));
+  }
+
+  function resetUI() {
+    generateBtn.classList.remove('hidden');
+    pdfPreview.classList.add('hidden');
+    emailSection.classList.add('hidden');
+    message.classList.add('hidden');
+    resetBtn.classList.add('hidden');
+    pdfPreview.src = ''; // Clear the preview
+  }
+});

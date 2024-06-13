@@ -3,25 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>eSign PDF Generator</title>
+    <title>Zoho E-Sign PDF</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="container">
-      <h1>eSign PDF Generator</h1>
+      <div class="header">
+        <img
+          src="./assets/zoho-logo-512.webp"
+          alt="Zoho Logo"
+          class="zoho-icon"
+        />
+        <h1>Zoho E-Sign PDF</h1>
+      </div>
       <button id="generate-btn">Generate PDF</button>
-      <iframe
-        id="pdf-preview"
-        style="display: none"
-        width="600"
-        height="400"
-      ></iframe>
-      <div id="email-section" style="display: none">
+      <iframe id="pdf-preview" class="hidden"></iframe>
+      <div id="email-section" class="hidden">
         <label for="email">Recipient Email:</label>
         <input type="email" id="email" required />
         <button id="upload-btn">Upload to Zoho</button>
       </div>
-      <p id="message"></p>
+      <p id="message" class="hidden"></p>
+      <button id="reset-btn" class="hidden">Create New PDF</button>
     </div>
     <script src="app.js"></script>
   </body>
