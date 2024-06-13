@@ -18,16 +18,11 @@ export class ZohoAuthService {
       }
     }
 
-    const url = 'https://accounts.zoho.in/oauth/v2/token';
-    const params = new URLSearchParams();
-    params.append('refresh_token', process.env.ZOHO_REFRESH_TOKEN || '');
-    params.append('client_id', process.env.ZOHO_CLIENT_ID || '');
-    params.append('client_secret', process.env.ZOHO_CLIENT_SECRET || '');
-    params.append('redirect_uri', 'https://sign.zoho.com');
-    params.append('grant_type', 'refresh_token');
+    const url = `https://accounts.zoho.in/oauth/v2/token?refresh_token=${process.env.ZOHO_REFRESH_TOKEN}&client_id=${process.env.ZOHO_CLIENT_ID}&client_secret=${process.env.ZOHO_CLIENT_SECRET}&redirect_uri=https://sign.zoho.com&grant_type=refresh_token`;
 
     try {
-      const response = await axios.post(url, params);
+      const response = await axios.post(url);
+
       if (response.data && response.data.access_token) {
         // Save the new token and its expiry time
         const tokenData = {

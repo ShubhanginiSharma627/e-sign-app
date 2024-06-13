@@ -60,6 +60,5 @@ export class PdfGeneratorService {
   ) {
     doc.fontSize(16).text(title, titleX, titleY);
     doc.rect(inputX, titleY - 10, 100, 30).stroke();
-    doc.text('esign', inputX + 10, titleY); // Place the text inside the rectangle
   }
 }
